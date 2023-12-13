@@ -13,9 +13,11 @@ const App = () => {
             <Routes>
                 <Route element={<UserLayout />} >
                     <Route path='/' element={<Home />} />
+                    <Route path='/your' element={<YourFormComponent />} />
                 </Route>
                 <Route path='/product/:id' element={<Productdetaile />} />
                 <Route path='/profile' element={<Profile />} />
+
             </Routes>
         </BrowserRouter>
     )

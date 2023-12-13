@@ -14,8 +14,20 @@ const YourFormComponent = () => {
         console.log('Form values:', values);
     };
 
+    const buttonStyle = {
+        background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%)',
+        border: '1px solid #ccc', // Adjust border color as needed
+        borderRadius: '4px', // Adjust border radius as needed
+        padding: '10px', // Adjust padding as needed
+        cursor: 'pointer',
+    };
+
+    const  getvalues =(values)=>{
+        console.log(values , "values");
+    }
+
     return (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Formik initialValues={initialValues} validate={getvalues} onSubmit={handleSubmit} enableReinitialize>
             <Form>
                 <div>
                     <label htmlFor="startTime">Start Time:</label>
@@ -25,7 +37,8 @@ const YourFormComponent = () => {
                                 {...field}
                                 format="HH:mm"
                                 placeholder="Select Start Time"
-                                onSelect={(value) => form.setFieldValue('startTime', moment(value))}
+                                value={field.value ? moment(field.value) : null} // Use defaultValue
+                                onSelect={(time) => form.setFieldValue('startTime', time)}
                             />
                         )}
                     </Field>
@@ -39,13 +52,14 @@ const YourFormComponent = () => {
                                 {...field}
                                 format="HH:mm"
                                 placeholder="Select End Time"
-                                onSelect={(value) => form.setFieldValue('endTime', moment(value))}
+                                value={field.value ? moment(field.value) : null} // Use defaultValue
+                                onSelect={(time) => form.setFieldValue('endTime', time)}
                             />
                         )}
                     </Field>
                 </div>
 
-                <button type="submit">Submit</button>
+                <button style={buttonStyle} type="submit">Submit</button>
             </Form>
         </Formik>
     );
